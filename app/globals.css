@@ -1,0 +1,30 @@
+/* globals.css — base resets only; Chakra UI handles component styling */
+
+:root {
+  --background:   #f8fafc;
+  --foreground:   #0f172a;
+  --radius:       0.625rem;
+
+  --brand-50:  #E6F0F4;
+  --brand-100: #B3D1DE;
+  --brand-500: #04374E;
+  --brand-600: #032C3E;
+  --brand-700: #02212F;
+
+  --font-geist-sans: "DM Sans", sans-serif;
+  --font-geist-mono: "JetBrains Mono", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { --background: #0a0a0a; --foreground: #ededed; }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
