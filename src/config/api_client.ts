@@ -1,4 +1,3 @@
-// src/config/api_client.ts
 import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
@@ -33,7 +32,8 @@ export const freshdeskApi = {
   status: () => apiClient.get("/freshdesk/status"),
   tickets: () => apiClient.get("/freshdesk/tickets"),
   ticket: (id: string) => apiClient.get(`/freshdesk/tickets/${id}`),
-  conversations: (id: string) => apiClient.get(`/freshdesk/tickets/${id}/conversations`),
+  conversations: (id: string) =>
+    apiClient.get(`/freshdesk/tickets/${id}/conversations`),
 };
 
 // HubSpot helpers
@@ -45,4 +45,15 @@ export const hubspotApi = {
 // Webhook helpers
 export const webhookApi = {
   logs: (limit = 100) => apiClient.get(`/webhook/logs?limit=${limit}`),
+  // ✅ Added: trigger a test webhook event
+  trigger: () =>
+    apiClient.post("/webhook/freshdesk", {
+      event: "ticket_created",
+      ticket_id: `TEST-${Date.now()}`,
+      subject: "Test webhook from portal",
+      status: "Open",
+      priority: "Medium",
+      requester_email: "test@example.com",
+      created_at: new Date().toISOString(),
+    }),
 };
