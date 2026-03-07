@@ -71,7 +71,7 @@ export default function WebhooksPage() {
         </Box>
 
         <HStack spacing="3">
-          {/* ✅ Trigger Test Webhook */}
+          {/* ✅ Trigger Test Webhook
           <Button
             size="sm"
             colorScheme="green"
@@ -82,7 +82,7 @@ export default function WebhooksPage() {
             loadingText="Triggering..."
           >
             Trigger Test Webhook
-          </Button>
+          </Button> */}
 
           <Button
             size="sm"

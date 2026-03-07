@@ -22,7 +22,7 @@ export default function OnboardingPage() {
           <Heading fontSize="4xl" fontWeight="900" color="gray.900" letterSpacing="-0.04em">
             Spritle Portal
           </Heading>
-          <Text color="gray.500" fontSize="lg">Freshdesk &amp; HubSpot — unified.</Text>
+          <Text color="gray.500" fontSize="lg">Freshdesk &amp; HubSpot — Task Assessment</Text>
         </VStack>
         <VStack w="full" spacing="3" align="stretch">
           {FEATURES.map((f) => {

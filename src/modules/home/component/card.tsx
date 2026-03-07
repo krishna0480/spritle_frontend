@@ -60,7 +60,7 @@ export function StatCard({ title, description, list, buttonText, buttonVariant, 
             onClick={() => router.push(route)}
             bg={buttonVariant === "blue" ? "#04374E" : "green.600"}
             _hover={{ bg: buttonVariant === "blue" ? "#032C3E" : "green.700" }}
-            h="11" fontSize="sm" borderRadius="xl"
+            fontSize="sm" borderRadius="xl"
           >
             {buttonText}
           </PrimaryButton>

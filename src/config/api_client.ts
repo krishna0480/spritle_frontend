@@ -47,13 +47,5 @@ export const webhookApi = {
   logs: (limit = 100) => apiClient.get(`/webhook/logs?limit=${limit}`),
   // ✅ Added: trigger a test webhook event
   trigger: () =>
-    apiClient.post("/webhook/freshdesk", {
-      event: "ticket_created",
-      ticket_id: `TEST-${Date.now()}`,
-      subject: "Test webhook from portal",
-      status: "Open",
-      priority: "Medium",
-      requester_email: "test@example.com",
-      created_at: new Date().toISOString(),
-    }),
+    apiClient.post("/webhook/freshdesk"),
 };
