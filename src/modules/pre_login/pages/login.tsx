@@ -9,8 +9,17 @@ import { SignupForm } from "../forms";
 import { LOGIN_FIELDS, loginSchema, LoginValues } from "../schema/login_schema";
 import { authApi } from "@/src/config/api_client";
 import { useAuth } from "@/src/app/auth_provider";
+import { ErrorBoundary } from "@/src/shared/components";
 
 export default function LoginPage() {
+  return (
+    <ErrorBoundary fallbackTitle="Login page failed to load">
+      <LoginContent />
+    </ErrorBoundary>
+  );
+}
+
+function LoginContent() {
   const router = useRouter();
   const { setToken } = useAuth();
   const toast = useToast();
@@ -35,10 +44,17 @@ export default function LoginPage() {
   };
 
   return (
-    <Box minH="100vh" display="flex" alignItems="center" justifyContent="center" bg="gray.50" p="6">
-      <Box w="full" maxW="md" bg="white" borderRadius="2xl" boxShadow="xl" p="8" border="1px solid" borderColor="gray.100">
+    <Box minH="100vh" display="flex" alignItems="center" justifyContent="center" p="6">
+      <Box w="full" maxW="md" bg="white" borderRadius="3xl"
+        boxShadow="0 25px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.15)"
+        p="10">
         <VStack spacing="2" mb="8" textAlign="center">
-          <Heading fontSize="3xl" fontWeight="900" color="#0d1b2a" letterSpacing="-0.03em">
+          <Box w="12" h="12" bg="linear-gradient(135deg, #0d4f6e, #0d9f83)" borderRadius="2xl"
+            display="flex" alignItems="center" justifyContent="center" mb="2"
+            boxShadow="0 8px 20px rgba(13,79,110,0.4)">
+            <Box w="5" h="5" borderRadius="full" bg="white" opacity={0.9} />
+          </Box>
+          <Heading fontSize="3xl" fontWeight="900" color="gray.900" letterSpacing="-0.03em">
             Welcome Back
           </Heading>
           <Text color="gray.500" fontSize="sm">Log in to your account</Text>
@@ -51,4 +67,5 @@ export default function LoginPage() {
       </Box>
     </Box>
   );
+
 }

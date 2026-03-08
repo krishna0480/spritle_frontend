@@ -3,7 +3,9 @@ import { Sidebar } from "@/src/modules/home/component/navbar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Box display={{ lg: "flex" }} minH="100vh" bg="gray.50">
+    <Box display={{ lg: "flex" }} minH="100vh"
+      background="linear-gradient(135deg, #0d4f6e 0%, #0a7c5c 35%, #1a6b8a 65%, #0d9f83 100%)"
+      backgroundAttachment="fixed">
       <Sidebar />
       <Box as="main" flex="1" minW="0" overflowY="auto">
         <Box p={{ base: "4", lg: "8" }}>

@@ -10,7 +10,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { freshdeskApi, hubspotApi } from "@/src/config/api_client";
-import { PrimaryButton } from "@/src/shared/components/primary_button";
+import { PrimaryButton, ErrorBoundary } from "@/src/shared/components";
 import { FormInput } from "@/src/shared/components/input_field";
 
 // ── Zod Schema (same pattern as signup_schema.ts) ────────────────────────────
@@ -28,6 +28,14 @@ type FreshdeskValues = z.infer<typeof freshdeskSchema>;
 interface Status { freshdesk: boolean; hubspot: boolean }
 
 export default function ConnectPage() {
+  return (
+    <ErrorBoundary fallbackTitle="Connect page failed to load">
+      <ConnectContent />
+    </ErrorBoundary>
+  );
+}
+
+function ConnectContent() {
   const [status, setStatus]   = useState<Status | null>(null);
   const [loading, setLoading] = useState(true);
   const toast = useToast();
@@ -81,17 +89,17 @@ export default function ConnectPage() {
 
   if (loading) return (
     <Center minH="60vh">
-      <Spinner size="xl" color="brand.500" thickness="3px" />
+      <Spinner size="xl" color="white" thickness="3px" />
     </Center>
   );
 
   return (
-    <Box maxW="3xl" mx="auto" py="8" px="4">
+    <Box maxW="3xl" mx="auto">
       <Box mb="10">
-        <Heading fontSize="2xl" fontWeight="900" color="gray.900" letterSpacing="-0.03em">
+        <Heading fontSize="2xl" fontWeight="900" color="white" letterSpacing="-0.03em">
           Connect Accounts
         </Heading>
-        <Text fontSize="xs" color="gray.400" fontWeight="600"
+        <Text fontSize="xs" color="whiteAlpha.700" fontWeight="600"
           textTransform="uppercase" letterSpacing="0.12em" mt="1">
           Link your Freshdesk and HubSpot accounts
         </Text>
@@ -102,7 +110,8 @@ export default function ConnectPage() {
         {/* ── Freshdesk Card ──────────────────────────────────────────────── */}
         <Box bg="white" border="1px solid"
           borderColor={status?.freshdesk ? "green.200" : "gray.100"}
-          borderRadius="2xl" p="7" boxShadow="sm">
+          borderRadius="2xl" p="7"
+          boxShadow="0 8px 30px rgba(0,0,0,0.12)">
 
           <HStack justify="space-between" mb="5">
             <HStack spacing="3">
@@ -173,7 +182,8 @@ export default function ConnectPage() {
         {/* ── HubSpot Card ────────────────────────────────────────────────── */}
         <Box bg="white" border="1px solid"
           borderColor={status?.hubspot ? "orange.200" : "gray.100"}
-          borderRadius="2xl" p="7" boxShadow="sm">
+          borderRadius="2xl" p="7"
+          boxShadow="0 8px 30px rgba(0,0,0,0.12)">
 
           <HStack justify="space-between" mb="5">
             <HStack spacing="3">

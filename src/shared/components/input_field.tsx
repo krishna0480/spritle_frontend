@@ -40,7 +40,7 @@ export function FormInput<T extends FieldValues>({
           fontSize="sm"
           bg="white"
           _placeholder={{ color: "gray.400" }}
-          _focus={{ borderColor: "brand.500", boxShadow: "0 0 0 1px #04374E" }}
+          _focus={{ borderColor: "brand.500", boxShadow: "0 0 0 1px #0d9f83" }}
           pr={isPassword ? "12" : undefined}
         />
         {isPassword && (

@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { RefreshCw, ChevronDown, ChevronUp, Radio, Zap } from "lucide-react";
 import { webhookApi } from "@/src/config/api_client";
+import { ErrorBoundary } from "@/src/shared/components";
 
 interface WebhookLog {
   id: string; eventType: string;
@@ -18,6 +19,14 @@ const EVENT_COLOR: Record<string, string> = {
 };
 
 export default function WebhooksPage() {
+  return (
+    <ErrorBoundary fallbackTitle="Webhook logs failed to load">
+      <WebhooksContent />
+    </ErrorBoundary>
+  );
+}
+
+function WebhooksContent() {
   const [logs, setLogs]             = useState<WebhookLog[]>([]);
   const [loading, setLoading]       = useState(true);
   const [expanded, setExpanded]     = useState<string | null>(null);
@@ -53,18 +62,18 @@ export default function WebhooksPage() {
 
   if (loading) return (
     <Center minH="60vh">
-      <Spinner size="xl" color="brand.500" thickness="3px" />
+      <Spinner size="xl" color="white" thickness="3px" />
     </Center>
   );
 
   return (
-    <Box maxW="5xl" mx="auto" py="8" px="4">
+    <Box maxW="5xl" mx="auto">
       <HStack justify="space-between" mb="8" flexWrap="wrap" gap="3">
         <Box>
-          <Heading fontSize="2xl" fontWeight="900" color="gray.900" letterSpacing="-0.03em">
+          <Heading fontSize="2xl" fontWeight="900" color="white" letterSpacing="-0.03em">
             Webhook Logs
           </Heading>
-          <Text fontSize="xs" color="gray.400" fontWeight="600"
+          <Text fontSize="xs" color="whiteAlpha.700" fontWeight="600"
             textTransform="uppercase" letterSpacing="0.12em" mt="1">
             {logs.length} event{logs.length !== 1 ? "s" : ""} received
           </Text>
@@ -84,13 +93,9 @@ export default function WebhooksPage() {
             Trigger Test Webhook
           </Button> */}
 
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={fetchLogs}
-            borderRadius="lg"
-            leftIcon={<RefreshCw size={14} />}
-          >
+          <Button size="sm" onClick={fetchLogs} borderRadius="lg" leftIcon={<RefreshCw size={14} />}
+            bg="whiteAlpha.200" color="white" border="1px solid" borderColor="whiteAlpha.400"
+            _hover={{ bg: "whiteAlpha.300" }} backdropFilter="blur(10px)">
             Refresh
           </Button>
         </HStack>
@@ -146,8 +151,10 @@ export default function WebhooksPage() {
           const isOpen = expanded === log.id;
           return (
             <Box key={log.id} bg="white" border="1px solid"
-              borderColor={isOpen ? "blue.200" : "gray.100"}
-              borderRadius="xl" overflow="hidden" transition="all 0.15s">
+              borderColor={isOpen ? "teal.200" : "gray.100"}
+              borderRadius="xl" overflow="hidden"
+              boxShadow={isOpen ? "0 8px 25px rgba(0,0,0,0.12)" : "0 4px 12px rgba(0,0,0,0.07)"}
+              transition="all 0.15s">
               <HStack p="4" cursor="pointer"
                 onClick={() => setExpanded(isOpen ? null : log.id)}
                 _hover={{ bg: "gray.50" }} justify="space-between">

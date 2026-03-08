@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { RefreshCw, ChevronDown, ChevronUp, User, MessageCircle } from "lucide-react";
 import { freshdeskApi, hubspotApi } from "@/src/config/api_client";
+import { ErrorBoundary } from "@/src/shared/components";
 
 interface Ticket {
   id: number; subject: string; status: string; priority: string;
@@ -23,6 +24,14 @@ const STATUS_COLOR: Record<string, string>   = { Open: "green", Pending: "yellow
 const PRIORITY_COLOR: Record<string, string> = { Low: "gray", Medium: "blue", High: "orange", Urgent: "red" };
 
 export default function TicketsPage() {
+  return (
+    <ErrorBoundary fallbackTitle="Tickets failed to load">
+      <TicketsContent />
+    </ErrorBoundary>
+  );
+}
+
+function TicketsContent() {
   const [tickets, setTickets]           = useState<Ticket[]>([]);
   const [loading, setLoading]           = useState(true);
   const [error, setError]               = useState<string | null>(null);
@@ -62,20 +71,22 @@ export default function TicketsPage() {
     }
   };
 
-  if (loading) return <Center minH="60vh"><Spinner size="xl" color="brand.500" thickness="3px" /></Center>;
+  if (loading) return <Center minH="60vh"><Spinner size="xl" color="white" thickness="3px" /></Center>;
 
   return (
-    <Box maxW="5xl" mx="auto" py="8" px="4">
+    <Box maxW="5xl" mx="auto">
       <HStack justify="space-between" mb="8">
         <Box>
-          <Heading fontSize="2xl" fontWeight="900" color="gray.900" letterSpacing="-0.03em">
+          <Heading fontSize="2xl" fontWeight="900" color="white" letterSpacing="-0.03em">
             Freshdesk Tickets
           </Heading>
-          <Text fontSize="xs" color="gray.400" fontWeight="600" textTransform="uppercase" letterSpacing="0.12em" mt="1">
+          <Text fontSize="xs" color="whiteAlpha.700" fontWeight="600" textTransform="uppercase" letterSpacing="0.12em" mt="1">
             {tickets.length} ticket{tickets.length !== 1 ? "s" : ""} loaded
           </Text>
         </Box>
-        <Button size="sm" variant="outline" onClick={fetchTickets} borderRadius="lg" leftIcon={<RefreshCw size={14} />}>
+        <Button size="sm" onClick={fetchTickets} borderRadius="lg" leftIcon={<RefreshCw size={14} />}
+          bg="whiteAlpha.200" color="white" border="1px solid" borderColor="whiteAlpha.400"
+          _hover={{ bg: "whiteAlpha.300" }} backdropFilter="blur(10px)">
           Refresh
         </Button>
       </HStack>
@@ -94,9 +105,9 @@ export default function TicketsPage() {
 
           return (
             <Box key={ticket.id} bg="white" border="1px solid"
-              borderColor={isOpen ? "blue.200" : "gray.100"}
+              borderColor={isOpen ? "teal.200" : "gray.100"}
               borderRadius="2xl" overflow="hidden"
-              boxShadow={isOpen ? "sm" : "xs"} transition="all 0.2s">
+              boxShadow={isOpen ? "0 8px 30px rgba(0,0,0,0.15)" : "0 4px 15px rgba(0,0,0,0.08)"} transition="all 0.2s">
 
               <HStack p="5" cursor="pointer" onClick={() => toggleTicket(ticket)}
                 _hover={{ bg: "gray.50" }} justify="space-between" align="start" spacing="4">

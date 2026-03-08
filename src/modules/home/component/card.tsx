@@ -22,16 +22,17 @@ export function StatCard({ title, description, list, buttonText, buttonVariant, 
   const router = useRouter();
   const isBlue = variant?.includes("blue") || buttonVariant === "blue";
 
-  const borderColor = variant === "border-blue" ? "blue.100" : variant === "border-green" ? "green.100" : "gray.100";
-  const bgColor     = variant === "border-blue" ? "blue.50"  : variant === "border-green" ? "green.50"  : "white";
-
   return (
-    <Box bg={bgColor} p="8" borderRadius="3xl" border="1px solid" borderColor={borderColor}
-      boxShadow="sm" _hover={{ boxShadow: "md", transform: "translateY(-2px)" }}
-      transition="all 0.2s" display="flex" flexDir="column" alignItems="center" textAlign="center" h="full">
+    <Box bg="white" p="8" borderRadius="3xl"
+      boxShadow="0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.8)"
+      _hover={{ boxShadow: "0 16px 50px rgba(0,0,0,0.2)", transform: "translateY(-3px)" }}
+      transition="all 0.25s" display="flex" flexDir="column" alignItems="center" textAlign="center" h="full">
 
       <VStack flex="1" w="full" spacing="4">
-        <Box p="4" borderRadius="2xl" bg={isBlue ? "blue.50" : "green.50"} color={isBlue ? "blue.600" : "green.600"}>
+        <Box p="4" borderRadius="2xl"
+          bg={isBlue ? "linear-gradient(135deg, #0d4f6e, #1a6b8a)" : "linear-gradient(135deg, #0a7c5c, #0d9f83)"}
+          color="white"
+          boxShadow={isBlue ? "0 8px 20px rgba(13,79,110,0.4)" : "0 8px 20px rgba(13,159,131,0.4)"}>
           <CardIcon size={28} />
         </Box>
         <VStack spacing="1">
@@ -41,11 +42,12 @@ export function StatCard({ title, description, list, buttonText, buttonVariant, 
           )}
         </VStack>
         {list && (
-          <Box w="full" bg="white" p="4" borderRadius="xl" border="1px solid" borderColor="gray.50" textAlign="left">
+          <Box w="full" bg="gray.50" p="4" borderRadius="xl" border="1px solid" borderColor="gray.100" textAlign="left">
             <VStack spacing="3" align="stretch">
               {list.map((item, i) => (
                 <HStack key={i} spacing="3">
-                  <Box w="1.5" h="1.5" borderRadius="full" bg={isBlue ? "blue.500" : "green.500"} flexShrink={0} mt="0.5" />
+                  <Box w="1.5" h="1.5" borderRadius="full"
+                    bg={isBlue ? "#1a6b8a" : "#0d9f83"} flexShrink={0} mt="0.5" />
                   <Text fontSize="sm" color="gray.600">{item}</Text>
                 </HStack>
               ))}
@@ -58,8 +60,15 @@ export function StatCard({ title, description, list, buttonText, buttonVariant, 
         <Box w="full" pt="6" mt="auto">
           <PrimaryButton
             onClick={() => router.push(route)}
-            bg={buttonVariant === "blue" ? "#04374E" : "green.600"}
-            _hover={{ bg: buttonVariant === "blue" ? "#032C3E" : "green.700" }}
+            bg={buttonVariant === "blue"
+              ? "linear-gradient(135deg, #0d4f6e, #1a6b8a)"
+              : "linear-gradient(135deg, #0a7c5c, #0d9f83)"}
+            _hover={{
+              bg: buttonVariant === "blue"
+                ? "linear-gradient(135deg, #0a3d56, #14527a)"
+                : "linear-gradient(135deg, #085e46, #097a64)",
+              transform: "translateY(-1px)",
+            }}
             fontSize="sm" borderRadius="xl"
           >
             {buttonText}

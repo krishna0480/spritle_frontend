@@ -8,23 +8,27 @@ const config: ThemeConfig = {
 
 export const theme = extendTheme({
   config,
-  fonts: {
-    heading: "var(--font-dm-sans), 'DM Sans', sans-serif",
-    body:    "var(--font-dm-sans), 'DM Sans', sans-serif",
-    mono:    "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
-  },
+    fonts: {
+      heading: "var(--font-poppins), 'Poppins', sans-serif",
+      body:    "var(--font-poppins), 'Poppins', sans-serif",
+      mono:    "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
+    },
   colors: {
     brand: {
-      50:  "#E6F0F4",
-      100: "#B3D1DE",
-      200: "#80B2C8",
-      300: "#4D93B2",
-      400: "#267A9F",
-      500: "#04374E",
-      600: "#032C3E",
-      700: "#02212F",
-      800: "#011620",
-      900: "#000B10",
+      50:  "#e6f7f4",
+      100: "#b3e8df",
+      200: "#80d9ca",
+      300: "#4dcab5",
+      400: "#26be9f",
+      500: "#0d9f83",
+      600: "#097a64",
+      700: "#065645",
+      800: "#033126",
+      900: "#010d0a",
+    },
+    ocean: {
+      500: "#1a5fa0",
+      600: "#14497c",
     },
   },
   radii: {
@@ -39,7 +43,9 @@ export const theme = extendTheme({
   styles: {
     global: {
       "html, body": {
-        bg: "gray.50",
+        background: "linear-gradient(135deg, #0d4f6e 0%, #0a7c5c 35%, #1a6b8a 65%, #0d9f83 100%)",
+        backgroundAttachment: "fixed",
+        minHeight: "100vh",
         color: "gray.900",
         scrollBehavior: "smooth",
         WebkitFontSmoothing: "antialiased",
@@ -48,7 +54,7 @@ export const theme = extendTheme({
   },
   components: {
     Button: {
-      baseStyle: { fontWeight: "700", borderRadius: "md" },
+      baseStyle: { fontWeight: "700", borderRadius: "xl" },
       defaultProps: { colorScheme: "brand" },
     },
     Input: {
